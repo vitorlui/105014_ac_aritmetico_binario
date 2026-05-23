@@ -229,7 +229,7 @@ window.AC.FloatAddSub = (function () {
         highlight: {}, isResult: true,
         result: { decimal: 0, binary: '0'.repeat(1 + expBits + mantBits) }
       });
-      return { valid: true, steps };
+      return { valid: true, steps, result: '0'.repeat(1 + expBits + mantBits) };
     }
 
     const firstOne = normMant.indexOf('1');
@@ -282,7 +282,7 @@ window.AC.FloatAddSub = (function () {
       result: { decimal: realValue, binary: resultBin }
     });
 
-    return { valid: true, steps };
+    return { valid: true, steps, result: resultBin };
   }
 
   return { compute };
