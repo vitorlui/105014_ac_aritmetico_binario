@@ -662,7 +662,7 @@ Cout = A·B + A·Cin + B·Cin</div>
       { label: '1001 + 0111 + C₀=1 (4b)', A: '1001', B: '0111', C0: '1' },
       { label: '101101 + 011010 + C₀=0 (6b)', A: '101101', B: '011010', C0: '0' }
     ];
-    render(calcTemplate(id, '2.1 Calculadora — Sumador con Carry Anticipado',
+    render(calcTemplate(id, '2.1 Carry Anticipado',
       'Calcula las sumas usando Gᵢ (generadores), Pᵢ (propagadores) y carries anticipados en paralelo. Latencia total siempre 6T (independiente del número de bits).',
       `<div class="form-group"><label>A (binario)</label><input id="${id}-A" type="text" value="1011" maxlength="16" placeholder="ej. 1011"></div>
        <div class="form-group"><label>B (binario)</label><input id="${id}-B" type="text" value="0110" maxlength="16" placeholder="ej. 0110"></div>
