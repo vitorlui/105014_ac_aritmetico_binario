@@ -925,7 +925,10 @@ Cout = A·B + A·Cin + B·Cin</div>
             <input id="${id}-mant" type="number" value="23" min="1" max="52">
           </div>
           <div class="form-group"><label>Sesgo (bias)</label>
-            <input id="${id}-bias" type="number" value="127" min="0" max="2047">
+            <div class="bias-row">
+              <input id="${id}-bias" type="number" value="127" min="0" max="2047">
+              <button type="button" class="bias-auto-btn" data-calc-id="${id}" title="Calcular bias automáticamente (2ᵏ⁻¹ − 1)">⟳</button>
+            </div>
             <small>IEEE simple: 127 · 1-4-x: 7 · Doble: 1023</small>
           </div>
           <div class="form-group">
@@ -1158,7 +1161,12 @@ Cout = A·B + A·Cin + B·Cin</div>
           </div>
           <div class="form-group"><label>Bits exponente</label><input id="${id}-exp"  type="number" value="8"   min="2" max="15"></div>
           <div class="form-group"><label>Bits mantisa</label>  <input id="${id}-mant" type="number" value="23"  min="1" max="52"></div>
-          <div class="form-group"><label>Bias</label>           <input id="${id}-bias" type="number" value="127" min="0" max="1023"></div>
+          <div class="form-group"><label>Bias</label>
+            <div class="bias-row">
+              <input id="${id}-bias" type="number" value="127" min="0" max="1023">
+              <button type="button" class="bias-auto-btn" data-calc-id="${id}" title="Calcular bias automáticamente (2ᵏ⁻¹ − 1)">⟳</button>
+            </div>
+          </div>
           <div id="${id}-error" style="display:none;margin-top:8px;"></div>
           <div class="btn-group">
             <button id="${id}-init"  class="btn btn-primary">Inicializar</button>
@@ -1358,7 +1366,12 @@ Cout = A·B + A·Cin + B·Cin</div>
           </div>
           <div class="form-group"><label>Bits exponente</label><input id="${id}-exp"  type="number" value="8"   min="2" max="15"></div>
           <div class="form-group"><label>Bits mantisa</label>  <input id="${id}-mant" type="number" value="23"  min="1" max="52"></div>
-          <div class="form-group"><label>Bias</label>           <input id="${id}-bias" type="number" value="127" min="0" max="1023"></div>
+          <div class="form-group"><label>Bias</label>
+            <div class="bias-row">
+              <input id="${id}-bias" type="number" value="127" min="0" max="1023">
+              <button type="button" class="bias-auto-btn" data-calc-id="${id}" title="Calcular bias automáticamente (2ᵏ⁻¹ − 1)">⟳</button>
+            </div>
+          </div>
           <div id="${id}-error" style="display:none;margin-top:8px;"></div>
           <div class="btn-group">
             <button id="${id}-init"  class="btn btn-primary">Inicializar</button>
@@ -1710,6 +1723,49 @@ Cout = A·B + A·Cin + B·Cin</div>
       overlay.classList.remove('visible');
     });
   }
+
+  // ====== MODAL BIAS AUTO ======
+  function showBiasModal(calcId) {
+    const expInput = document.getElementById(calcId + '-exp');
+    const biasInput = document.getElementById(calcId + '-bias');
+    if (!expInput || !biasInput) return;
+
+    const k = parseInt(expInput.value) || 0;
+    const computed = Math.pow(2, k - 1) - 1;
+
+    const existing = document.getElementById('bias-modal-overlay');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'bias-modal-overlay';
+    overlay.innerHTML = `
+      <div id="bias-modal">
+        <h3>Calcular sesgo (bias)</h3>
+        <p>La fórmula estándar del sesgo para un campo de exponente de <strong>${k} bits</strong> es:</p>
+        <div class="bias-formula">Sesgo = 2<sup>k−1</sup> − 1 = 2<sup>${k}−1</sup> − 1 = <strong>${computed}</strong></div>
+        <p class="bias-modal-note">¿Deseas actualizar el campo de sesgo con el valor <strong>${computed}</strong>?</p>
+        <div class="bias-modal-actions">
+          <button id="bias-modal-apply" class="btn btn-primary">Aplicar (${computed})</button>
+          <button id="bias-modal-cancel" class="btn btn-outline">Cancelar</button>
+        </div>
+      </div>`;
+
+    document.body.appendChild(overlay);
+
+    document.getElementById('bias-modal-apply').addEventListener('click', () => {
+      biasInput.value = computed;
+      biasInput.dispatchEvent(new Event('input'));
+      overlay.remove();
+    });
+    document.getElementById('bias-modal-cancel').addEventListener('click', () => overlay.remove());
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  }
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('.bias-auto-btn')) {
+      showBiasModal(e.target.closest('.bias-auto-btn').dataset.calcId);
+    }
+  });
 
   // ====== INICIALIZACIÓN ======
   document.addEventListener('DOMContentLoaded', () => {

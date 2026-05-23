@@ -1320,3 +1320,88 @@ body.sidebar-collapsed #sidebar-collapse-btn { left: 0; }
 
   .pdf-print-header { display: block !important; }
 }
+
+/* ===== BIAS AUTO BUTTON ===== */
+.bias-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bias-auto-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-primary);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, border-color .15s, transform .2s;
+}
+.bias-auto-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  transform: rotate(180deg);
+}
+
+/* ===== BIAS MODAL ===== */
+#bias-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#bias-modal {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  padding: 28px 32px;
+  max-width: 420px;
+  width: 90%;
+}
+
+#bias-modal h3 {
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  margin: 0 0 12px;
+}
+
+#bias-modal p {
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  margin: 0 0 10px;
+}
+
+.bias-formula {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-family: monospace;
+  font-size: .95rem;
+  text-align: center;
+  margin: 10px 0 14px;
+  color: var(--color-text);
+}
+
+.bias-modal-note {
+  font-size: .87rem !important;
+  margin-top: 4px !important;
+}
+
+.bias-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
