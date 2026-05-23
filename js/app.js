@@ -1395,6 +1395,12 @@ Cout = A·B + A·Cin + B·Cin</div>
               <button type="button" class="bias-auto-btn" data-calc-id="${id}" title="Calcular bias automáticamente (2ᵏ⁻¹ − 1)">⟳</button>
             </div>
           </div>
+          <div class="form-group">
+            <label class="toggle-expl-label" style="font-size:.85rem;font-weight:600">
+              <input type="checkbox" id="${id}-show-inv" checked style="accent-color:var(--color-primary)">
+              Verificar con conversión inversa (flotante → decimal)
+            </label>
+          </div>
           <div id="${id}-error" style="display:none;margin-top:8px;"></div>
           <div class="btn-group">
             <button id="${id}-init"  class="btn btn-primary">Inicializar</button>
@@ -1423,6 +1429,7 @@ Cout = A·B + A·Cin + B·Cin</div>
           <div id="${id}-tab-full" class="tab-panel">
             <div id="${id}-table"><p class="text-muted">Pulsa "Resolver completo".</p></div>
           </div>
+          <div id="${id}-reverse"></div>
         </div>
       </div>
     </div>`, 'Mult./Div. en Punto Flotante');
@@ -1457,6 +1464,20 @@ Cout = A·B + A·Cin + B·Cin</div>
       });
     });
 
+    function showReverse(resultBin, cfg) {
+      const showInv = document.getElementById(id + '-show-inv')?.checked;
+      const revEl   = document.getElementById(id + '-reverse');
+      if (!revEl) return;
+      if (!showInv || !resultBin) { revEl.innerHTML = ''; return; }
+      const rev = window.AC.FloatRepr.floatToDec(resultBin, cfg);
+      if (!rev.valid) { revEl.innerHTML = `<div class="alert alert-error">${F().escapeHtml(rev.error)}</div>`; return; }
+      revEl.innerHTML = `<div class="reverse-section">
+        <h4>Verificación: conversión inversa (flotante → decimal)</h4>
+        <p class="text-muted" style="margin-bottom:10px">Partiendo del resultado binario <span class="mono">${F().escapeHtml(resultBin)}</span>, reconstruimos el valor decimal.</p>
+        ${F().renderAlgorithmTable(rev.steps, [])}
+      </div>`;
+    }
+
     bindStepControls(id, regNames);
 
     document.getElementById(id + '-init').addEventListener('click', () => {
@@ -1465,6 +1486,7 @@ Cout = A·B + A·Cin + B·Cin</div>
       if (!res.valid) { showAlert(id, res.error); return; }
       setupStepController(id, { steps: res.steps, registerNames: regNames });
       document.getElementById(id + '-reinit').disabled = false;
+      showReverse(res.result, getConfig());
     });
 
     document.getElementById(id + '-solve').addEventListener('click', () => {
@@ -1473,6 +1495,7 @@ Cout = A·B + A·Cin + B·Cin</div>
       if (!res.valid) { showAlert(id, res.error); return; }
       renderFullTable(id, res.steps, regNames);
       document.querySelector(`[data-tab="${id}-tab-full"]`).click();
+      showReverse(res.result, getConfig());
     });
 
     document.getElementById(id + '-reset').addEventListener('click', () => resetCalcUI(id));

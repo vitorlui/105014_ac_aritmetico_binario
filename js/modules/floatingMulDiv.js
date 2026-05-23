@@ -173,7 +173,7 @@ window.AC.FloatMulDiv = (function () {
       result: { decimal: realValue, binary: resultBin }
     });
 
-    return { valid: true, steps };
+    return { valid: true, steps, result: resultBin };
   }
 
   return { compute };
