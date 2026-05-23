@@ -466,10 +466,6 @@ window.AC = window.AC || {};
           <h3>Modo resolver completo</h3>
           <p><span class="mode-badge full">Resolver</span> Muestra de una vez la tabla completa del algoritmo, igual que en las resoluciones de clase.</p>
         </div>
-        <div class="info-card">
-          <h3>Ejercicios guiados</h3>
-          <p>Banco de ejercicios por tema con solución paso a paso y explicaciones didácticas de cada operación.</p>
-        </div>
         <div class="info-card" style="border-left-color:#e07b22">
           <h3>Aviso didáctico</h3>
           <p>Todas las operaciones se muestran con fines docentes. El objetivo es entender el <em>procedimiento</em>, no solo el resultado.</p>
@@ -477,9 +473,24 @@ window.AC = window.AC || {};
       </div>
       <div class="theory-content">
         <h3>Contenidos disponibles</h3>
-        <p>Navega por el menú lateral para acceder a las calculadoras de sumadores (paralelo y carry anticipado), multiplicación binaria (Algoritmo 2 con registros C,A,Q,M), división con restauración y representación en coma flotante.</p>
+        <ul>
+          <li><strong>2. Sumadores</strong> — Calculadora con carry anticipado (CLA): suma binaria paso a paso con cálculo explícito de G, P y C.</li>
+          <li><strong>3. Multiplicación y División</strong>
+            <ul>
+              <li>Multiplicación 2n bits — registros MD, PP, MR.</li>
+              <li>Multiplicación n bits — Algoritmo con registros C, A, Q, M.</li>
+              <li>División con restauración — registros A, Q, M.</li>
+            </ul>
+          </li>
+          <li><strong>4. Punto Flotante (IEEE 754)</strong>
+            <ul>
+              <li>Representación — conversión decimal ↔ IEEE 754 con redondeo round-to-nearest-even.</li>
+              <li>Suma y resta — algoritmo paso a paso con alineación de exponentes.</li>
+            </ul>
+          </li>
+        </ul>
         <h3>Cómo usar las calculadoras</h3>
-        <p>1. Introduce los operandos en binario en el panel de la izquierda.<br>
+        <p>1. Introduce los operandos en el panel de la izquierda.<br>
         2. Pulsa <strong>Inicializar</strong> para preparar el algoritmo.<br>
         3. Usa <strong>Siguiente ▶</strong> para ver el siguiente paso o <strong>Resolver completo</strong> para ver toda la tabla.<br>
         4. Cada paso incluye el estado de los registros, la operación realizada y una explicación didáctica.</p>
