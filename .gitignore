@@ -1,0 +1,23 @@
+# Carpeta images antigua (reemplazada por img/)
+images/
+
+# Archivos temporales de Office
+~$*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Carpeta de documentación (solo uso local)
+docs/
+
+# Archivos de proyecto / contexto (solo uso local)
+CONTEXTO_PROYECTO.md
+tarea_presentacion.md
+build_pptx.py
+pptx_extract.txt
+slide_list.txt
+docs/ac_pr_aritmetic_ES_resumen.md
+docs/context_aritmetico.md
+docs/paso2.md
+docs/site_didatico.md
