@@ -452,7 +452,7 @@ window.AC = window.AC || {};
 
   // --- INICIO ---
   function viewInicio() {
-    render(`<div>
+    render(`<div class="inicio-page">
       <div class="inicio-hero">
         <h2>Procesamiento Aritmético — Arquitectura de Computadores</h2>
         <p>Site educativo interactivo para estudiar operaciones aritméticas en binario paso a paso, siguiendo la metodología de clase.</p>

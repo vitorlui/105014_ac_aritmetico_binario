@@ -866,6 +866,9 @@ nav { flex: 1; padding: 10px 0; }
   max-width: 800px;
 }
 
+.inicio-page { width: 100%; }
+.inicio-page .theory-content { max-width: none; }
+
 .theory-content h3 {
   font-size: 1.05rem;
   color: var(--color-primary);
